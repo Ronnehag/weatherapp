@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Card({ name, country, icon }) {
+export default function Card({ name, country, icon, text, updated, tempC }) {
     return (
         <div className="row">
             <div className="col s12 m6">
@@ -8,12 +8,11 @@ export default function Card({ name, country, icon }) {
                     <div className="card-content white-text">
                         <span className="card-title">{name} : {country}</span>
                         <img src={icon} alt="weather" />
-                        <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+                        <p>{text}</p>
+                        <p>Temperature: {tempC} °C</p>
                     </div>
-                    <div className="card-action">
-                        <a href="!#">This is a link</a>
-                        <a href="!#">This is a link</a>
+                    <div className="card-action blue-grey lighten-3">
+                        <span>Last updated: {updated}</span>
                     </div>
                 </div>
             </div>

@@ -18,6 +18,7 @@ export class WeatherCard extends Component {
             const { name, country } = this.state.data.location;
             const { last_updated, temp_c } = this.state.data.current;
             const { text, icon } = this.state.data.current.condition;
+            console.log(last_updated);
             return (
                 <Card
                     name={name}
@@ -31,14 +32,29 @@ export class WeatherCard extends Component {
         }
     }
 
+    getLocation = (cb) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(cb);
+        } else {
+            cb(null);
+        }
+    }
     // Fetch API data on mount, set state to Stockholms weather
     async componentDidMount() {
         try {
+            this.getLocation(async (position) => {
+                const { longitude, latitude } = position.coords;
+                let cordUrl = `https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${latitude},${longitude}`;
+                const res = await fetch(cordUrl);
+                const json = await res.json();
+                this.setState({ data: json });
+            });
+
+        } catch (err) {
+            console.log(err);
             const res = await fetch(Stockholm.API);
             const json = await res.json();
             this.setState({ data: json });
-        } catch (err) {
-            console.log(err);
         }
 
     }
@@ -58,5 +74,6 @@ export class WeatherCard extends Component {
 const Stockholm = {
     API: "https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=Stockholm"
 }
-
+// Search longitude/latitude
+//https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=59.349898,18.0230882
 export default WeatherCard
