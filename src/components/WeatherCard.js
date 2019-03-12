@@ -8,30 +8,35 @@ export class WeatherCard extends Component {
     });
     state = WeatherCard.initialState();
 
+    showDetails = () => {
+
+    }
+
+    // Loads the data and generate the card
     loadWeatherData = () => {
         if (this.state.data.length === 0) {
             return (
                 <h6>Loading data...</h6>
             )
         } else {
-            console.log(this.state.data);
             const { name, country } = this.state.data.location;
-            const { last_updated, temp_c } = this.state.data.current;
+            const { last_updated, temp_c, temp_f } = this.state.data.current;
             const { text, icon } = this.state.data.current.condition;
-            console.log(last_updated);
             return (
                 <Card
                     name={name}
                     country={country}
                     updated={last_updated}
                     tempC={temp_c}
+                    tempF={temp_f}
                     icon={icon}
                     text={text}
+                    details={this.showDetails}
                 />
             )
         }
     }
-
+    // Fetch current longitude / latitude
     getLocation = (cb) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(cb);
@@ -61,10 +66,8 @@ export class WeatherCard extends Component {
     render() {
 
         return (
-
             <section>
                 {this.loadWeatherData()}
-
             </section>
         )
     }
