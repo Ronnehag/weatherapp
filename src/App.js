@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
-import WeatherCard from './components/WeatherCard';
+import Weather from './components/Weather';
 
 
 class App extends Component {
+
+
+  searchForWeatherByName = (name) => {
+    console.log(name);
+  };
+
   render() {
     return (
       <div className="container">
         <Header />
-        <SearchForm />
-        <WeatherCard />
+        <SearchForm searchForWeatherByName={this.searchForWeatherByName}/>
+        <Weather />
       </div>
     );
   }
