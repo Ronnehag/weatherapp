@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import WeatherCard from './WeatherCard';
+import LoadingBar from './Layout/LoadingBar';
 
 export class Weather extends Component {
 
@@ -9,20 +10,14 @@ export class Weather extends Component {
     state = Weather.initialState();
 
     showDetails = () => {
-
+        // Show more details
     }
 
-    // Loads the data and generate the card
+    // Loads the data and generate the card showing details
     loadWeatherData = () => {
         if (this.state.data.length === 0) {
             return (
-                <div className="row">
-                    <div className="col s6 offset-s3">
-                        <div className="progress">
-                            <div className="indeterminate"></div>
-                        </div>
-                    </div>
-                </div>
+                <LoadingBar />
             )
         } else {
             const { name, country } = this.state.data.location;
@@ -50,6 +45,19 @@ export class Weather extends Component {
             cb(null);
         }
     }
+
+    componentDidUpdate(prevprops, prevstate){
+        if(this.props.data !== prevprops.data){
+            this.setState({
+                data: this.props.data
+            });
+        } else{
+            // Do smth
+        }
+
+        console.log(this.state.data);
+    }
+
     // Fetch API data on mount, set state to Stockholms weather
     async componentDidMount() {
         try {
@@ -60,17 +68,14 @@ export class Weather extends Component {
                 const json = await res.json();
                 this.setState({ data: json });
             });
-
         } catch (err) {
-            console.log(err);
             const res = await fetch(Stockholm.API);
             const json = await res.json();
             this.setState({ data: json });
         }
-
     }
-    render() {
 
+    render() {
         return (
             <section>
                 {this.loadWeatherData()}
