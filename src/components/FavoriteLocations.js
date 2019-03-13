@@ -1,14 +1,13 @@
 import React from 'react'
 
-export default function FavoriteLocations({ locations, remove }) {
+export default function FavoriteLocations({ locations, remove, searchWeather }) {
 
-    console.log(locations);
     const locationList = locations.length ? (
         locations.map(location => {
             const { name, id } = location;
             return (
                 <li key={id} style={{ padding: "5px" }}>
-                    <span className="btn waves-light waves-effect">{name}
+                    <span className="btn waves-light waves-effect" onClick={() => searchWeather(name)}>{name}
                         <i className="tiny material-icons right red-text text-darken-2 remove-icon" onClick={() => remove(id)}>remove_circle</i></span>
                 </li>
             )

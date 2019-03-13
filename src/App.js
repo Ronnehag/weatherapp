@@ -27,10 +27,11 @@ class App extends Component {
   }
 
   removeFromLocalStorage = (id) => {
-    // Get local storage
-
-    // remove object
-    // set storage back
+    this.setState({
+      storedLocations: [...this.state.storedLocations.filter(location => location.id !== id)]
+    }, () => {
+      localStorage.setItem("locations", JSON.stringify(this.state.storedLocations));
+    });
   }
 
   // Check if storage exists, appends item. Else creates it as new.
@@ -94,7 +95,7 @@ class App extends Component {
             <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} />
           </div>
           <div className="col s4">
-            <FavoriteLocations locations={storedLocations} remove={this.removeFromLocalStorage} />
+            <FavoriteLocations locations={storedLocations} remove={this.removeFromLocalStorage} searchWeather={this.searchForWeatherByName} />
           </div>
         </div>
       </div>
