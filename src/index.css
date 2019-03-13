@@ -16,3 +16,17 @@ body {
 .mt-5{
   margin-top: 10px;
 }
+
+.input.field{
+  color: white !important;
+}
+input[type="text"]{
+  color: white;
+}
+.btn-orange{
+  margin-top: 6px;
+  transition: all .2s ease-in-out !important;
+}
+.btn-orange:hover{
+  background: #ffa816 !important;
+}

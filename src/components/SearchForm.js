@@ -14,24 +14,25 @@ export class SearchForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.searchForWeatherByName(this.state.country);
-        this.state = SearchForm.initialState();
+        this.setState(SearchForm.initialState());
     }
 
     render() {
         return (
             <form className="row">
-                <form className="col s12">
+                <div className="col s12">
                     <div className="row">
                         <div className="input-field col s6 offset-s2">
-                            <input placeholder="Position..." type="search" name="country" value={this.state.country} onChange={this.handleChange} />
+                            <input type="text" name="country" value={this.state.country} onChange={this.handleChange} className="searchInput" />
+                            <label htmlFor="country">City/Location:</label>
                         </div>
                         <div className="input-field col s2">
-                            <button type="submit" onClick={this.handleSubmit} className="btn waves-effect waves-light orange">Search</button>
+                            <button type="submit" onClick={this.handleSubmit} className="btn waves-effect waves-light orange btn-orange">
+                            <i className="material-icons right">send</i>Search</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </form>
-
         )
     }
 }

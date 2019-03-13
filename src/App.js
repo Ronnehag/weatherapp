@@ -7,7 +7,7 @@ import Weather from './components/Weather';
 class App extends Component {
 
   state = {
-    data: []
+    weaterData: [],
   }
 
   fetchData = async (url) => {
@@ -25,21 +25,30 @@ class App extends Component {
     }
   }
 
-  searchForWeatherByName = (name) => {
-    this.setState({
-      data: `https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${name}`
-    })
+  searchForWeatherByName = async (name) => {
+    if (name !== null) {
+      const data =
+        await this.fetchData(`https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${name}`);
+      this.setState({
+        weatherData: data
+      });
+    }
+    console.log(name, this.state.weatherData);
   };
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={mainBg}>
         <Header />
         <SearchForm searchForWeatherByName={this.searchForWeatherByName} />
-        <Weather data={this.state.data} />
+        <Weather weatherData={this.state.weatherData} />
       </div>
     );
   }
+}
+
+const mainBg = {
+  background: "#031196"
 }
 
 export default App;

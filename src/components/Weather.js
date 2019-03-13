@@ -5,7 +5,7 @@ import LoadingBar from './Layout/LoadingBar';
 export class Weather extends Component {
 
     static initialState = () => ({
-        data: []
+        weatherData: []
     });
     state = Weather.initialState();
 
@@ -15,14 +15,14 @@ export class Weather extends Component {
 
     // Loads the data and generate the card showing details
     loadWeatherData = () => {
-        if (this.state.data.length === 0) {
+        if (this.state.weatherData.length === 0) {
             return (
                 <LoadingBar />
             )
         } else {
-            const { name, country } = this.state.data.location;
-            const { last_updated, temp_c, temp_f } = this.state.data.current;
-            const { text, icon } = this.state.data.current.condition;
+            const { name, country } = this.state.weatherData.location;
+            const { last_updated, temp_c, temp_f } = this.state.weatherData.current;
+            const { text, icon } = this.state.weatherData.current.condition;
             return (
                 <WeatherCard
                     name={name}
@@ -47,15 +47,13 @@ export class Weather extends Component {
     }
 
     componentDidUpdate(prevprops, prevstate){
-        if(this.props.data !== prevprops.data){
+        if(this.props.weatherData !== prevprops.weatherData){
             this.setState({
-                data: this.props.data
+                weatherData: this.props.weatherData
             });
         } else{
             // Do smth
         }
-
-        console.log(this.state.data);
     }
 
     // Fetch API data on mount, set state to Stockholms weather
@@ -66,12 +64,12 @@ export class Weather extends Component {
                 let cordUrl = `https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${latitude},${longitude}`;
                 const res = await fetch(cordUrl);
                 const json = await res.json();
-                this.setState({ data: json });
+                this.setState({ weatherData: json });
             });
         } catch (err) {
             const res = await fetch(Stockholm.API);
             const json = await res.json();
-            this.setState({ data: json });
+            this.setState({ weatherData: json });
         }
     }
 

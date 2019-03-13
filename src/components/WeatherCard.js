@@ -12,7 +12,7 @@ export default function WeatherCard({ name, country, icon, text, updated, tempC,
                         <p>{tempC} °C / {tempF} °F</p>
                         <br />
                         <button className="btn btn-waves" onClick={() => details(name)}>
-                            <i class="material-icons right">details</i>
+                            <i className="material-icons right">details</i>
                             Details</button>
                     </div>
                     <div className="card-action blue-grey lighten-3">
