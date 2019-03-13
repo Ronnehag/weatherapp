@@ -36,3 +36,11 @@ input[type="text"]{
 .color-yellow:hover{
   cursor: pointer;
 }
+
+.remove-icon{
+  transition: all .2s ease-in !important;
+}
+.remove-icon:hover{
+  color: #ef5350 !important;
+  transform: scale(1.1) !important;
+}

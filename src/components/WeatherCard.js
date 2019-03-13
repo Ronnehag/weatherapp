@@ -9,7 +9,6 @@ export default function WeatherCard({ name, country, icon, text, updated, tempC,
                         <span className="card-title" style={cardTitle}>{name}, {country}
                             <span className="align-right">
                                 <i className="material-icons right color-yellow" title="Add to favourites" onClick={() => addToFav(name)}>star</i></span></span>
-
                         <img src={icon} alt="weather" />
                         <p>{text}</p>
                         <p>{tempC} °C / {tempF} °F</p>

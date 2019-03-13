@@ -18,30 +18,38 @@ class App extends Component {
 
   // Fetches the local storage and sets the stored objects to states storedLocations
   componentDidMount() {
-    this.getLocalStorage();
-  }
-
-  // Fetches favorite locations from localstorage, adds it to App state
-  getLocalStorage = () => {
     const data = JSON.parse(localStorage.getItem("locations"));
     if (data !== null) {
-      console.log(data);
       this.setState({
-        storedLocations: [...this.state.storedLocations, data]
+        storedLocations: data
       });
     }
   }
+
+  removeFromLocalStorage = (id) => {
+    // Get local storage
+
+    // remove object
+    // set storage back
+  }
+
   // Check if storage exists, appends item. Else creates it as new.
   addToLocalStorage = (name) => {
+    const exists = this.state.storedLocations.find((val) => val.name === name);
+    if (exists) return;
+
     let data = JSON.parse(localStorage.getItem("locations"));
     if (data !== null) {
       const location = {
-        name: name
+        name: name,
+        id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
       }
+      console.log(location);
       this.setState(prevState => ({
-        storedLocations: [...prevState.storedLocations, location]
-      }));
-      localStorage.setItem("locations", JSON.stringify(this.state.storedLocations));
+        storedLocations: [...this.state.storedLocations, location]
+      }), () => {
+        localStorage.setItem("locations", JSON.stringify(this.state.storedLocations));
+      });
     } else {
       this.createStorage(name);
     }
@@ -49,7 +57,8 @@ class App extends Component {
 
   createStorage = (name) => {
     const location = {
-      name: name
+      name: name,
+      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     }
     this.setState(prevState => ({
       storedLocations: [...prevState.storedLocations, location]
@@ -85,7 +94,7 @@ class App extends Component {
             <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} />
           </div>
           <div className="col s4">
-            <FavoriteLocations locations={storedLocations} />
+            <FavoriteLocations locations={storedLocations} remove={this.removeFromLocalStorage} />
           </div>
         </div>
       </div>
