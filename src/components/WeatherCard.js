@@ -1,12 +1,15 @@
 import React from 'react'
 
-export default function WeatherCard({ name, country, icon, text, updated, tempC, tempF, details }) {
+export default function WeatherCard({ name, country, icon, text, updated, tempC, tempF, details, addToFav }) {
     return (
         <div className="row">
-            <div className="col s12 m4 offset-m2">
+            <div className="col s12 m8 offset-m3">
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <span className="card-title" style={cardTitle}>{name}, {country}</span>
+                        <span className="card-title" style={cardTitle}>{name}, {country}
+                            <span className="align-right">
+                                <i className="material-icons right color-yellow" title="Add to favourites" onClick={() => addToFav(name)}>star</i></span></span>
+
                         <img src={icon} alt="weather" />
                         <p>{text}</p>
                         <p>{tempC} °C / {tempF} °F</p>

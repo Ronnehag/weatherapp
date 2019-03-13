@@ -10,7 +10,7 @@ const Header = () => {
 }
 
 const headerText = {
-    color: "#ff9800",
+    color: "#fff",
     padding: "15px",
     textTransform : "uppercase",
     fontWeight: "bold"

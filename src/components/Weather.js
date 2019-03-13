@@ -9,28 +9,37 @@ export class Weather extends Component {
     });
     state = Weather.initialState();
 
+    addToFav = (name) => {
+        this.props.addToLocalStorage(name);
+    }
+
     // Loads the data and generate the card showing details
     loadWeatherData = () => {
-        if (this.state.weatherData.length === 0) {
-            return (
-                <LoadingBar />
-            )
-        } else {
-            const { name, country } = this.state.weatherData.location;
-            const { last_updated, temp_c, temp_f } = this.state.weatherData.current;
-            const { text, icon } = this.state.weatherData.current.condition;
-            return (
-                <WeatherCard
-                    name={name}
-                    country={country}
-                    updated={last_updated}
-                    tempC={temp_c}
-                    tempF={temp_f}
-                    icon={icon}
-                    text={text}
-                    details={this.showDetails}
-                />
-            )
+        try {
+            if (this.state.weatherData.length === 0) {
+                return (
+                    <LoadingBar />
+                )
+            } else {
+                const { name, country } = this.state.weatherData.location;
+                const { last_updated, temp_c, temp_f } = this.state.weatherData.current;
+                const { text, icon } = this.state.weatherData.current.condition;
+                return (
+                    <WeatherCard
+                        name={name}
+                        country={country}
+                        updated={last_updated}
+                        tempC={temp_c}
+                        tempF={temp_f}
+                        icon={icon}
+                        text={text}
+                        details={this.showDetails}
+                        addToFav={this.addToFav}
+                    />
+                )
+            }
+        } catch (err) {
+            console.log(err);
         }
     }
     // Fetch current longitude / latitude using HTML5 geolocation

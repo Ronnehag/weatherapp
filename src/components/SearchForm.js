@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
 
 export class SearchForm extends Component {
     static initialState = () => ({
@@ -9,23 +7,24 @@ export class SearchForm extends Component {
     })
     state = SearchForm.initialState();
 
-    getSuggestions = () => {
-        axios.get(`https://api.apixu.com/v1/search.json?key=5d1d8a019a1b42f2bd983655191203&q=${this.state.country}`)
-            .then(({ data }) => {
-                this.setState({
-                    data: data.data
-                });
-            });
-    }
-
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
+
+    validateInput = (input) => {
+        // check for numbers, symbols etc
+        input = this.state.country.trim().toLowerCase();
+        input = input.replace(/å|ä/g, "a");
+        input = input.replace(/ö/g, "o");
+        return input;
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.searchForWeatherByName(this.state.country);
+        let searchName = this.validateInput(this.state.country);
+        this.props.searchForWeatherByName(searchName);
         this.setState(SearchForm.initialState());
     }
 
@@ -36,13 +35,12 @@ export class SearchForm extends Component {
                     <div className="row">
                         <div className="input-field col s6 offset-s2">
                             <input
-                                ref={input => this.search = input}
                                 type="text"
                                 name="country"
                                 value={this.state.country}
                                 onChange={this.handleChange}
                                 className="searchInput" />
-                            <label htmlFor="country">City name:</label>
+                            <label htmlFor="country">Location name</label>
                         </div>
                         <div className="input-field col s2">
                             <button type="submit" onClick={this.handleSubmit} className="btn waves-effect waves-light orange btn-orange">

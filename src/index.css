@@ -30,3 +30,9 @@ input[type="text"]{
 .btn-orange:hover{
   background: #ffa816 !important;
 }
+.color-yellow{
+  color: #ffa816;
+}
+.color-yellow:hover{
+  cursor: pointer;
+}
