@@ -5,9 +5,17 @@ import Weather from './components/Weather';
 
 
 class App extends Component {
-
   state = {
     weaterData: [],
+    storedUrls: []
+  }
+
+  getLocalStorage = () => {
+
+  }
+
+  addToLocalStorage = () => {
+
   }
 
   fetchData = async (url) => {
@@ -33,7 +41,6 @@ class App extends Component {
         weatherData: data
       });
     }
-    console.log(name, this.state.weatherData);
   };
 
   render() {

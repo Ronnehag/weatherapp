@@ -9,10 +9,6 @@ export class Weather extends Component {
     });
     state = Weather.initialState();
 
-    showDetails = () => {
-        // Show more details
-    }
-
     // Loads the data and generate the card showing details
     loadWeatherData = () => {
         if (this.state.weatherData.length === 0) {
@@ -37,7 +33,7 @@ export class Weather extends Component {
             )
         }
     }
-    // Fetch current longitude / latitude
+    // Fetch current longitude / latitude using HTML5 geolocation
     getLocation = (cb) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(cb);
@@ -45,31 +41,27 @@ export class Weather extends Component {
             cb(null);
         }
     }
-
-    componentDidUpdate(prevprops, prevstate){
-        if(this.props.weatherData !== prevprops.weatherData){
+    // Update the card after search is invoked from App.js
+    componentDidUpdate(prevprops, prevstate) {
+        if (this.props.weatherData !== prevprops.weatherData) {
             this.setState({
                 weatherData: this.props.weatherData
             });
-        } else{
-            // Do smth
         }
     }
-
-    // Fetch API data on mount, set state to Stockholms weather
+    // Fetching the weather data from current position (lat/lon) on mounting.
     async componentDidMount() {
         try {
             this.getLocation(async (position) => {
+                if (position === null) return;
                 const { longitude, latitude } = position.coords;
-                let cordUrl = `https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${latitude},${longitude}`;
-                const res = await fetch(cordUrl);
+                const res =
+                    await fetch(`https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${latitude},${longitude}`);
                 const json = await res.json();
                 this.setState({ weatherData: json });
             });
         } catch (err) {
-            const res = await fetch(Stockholm.API);
-            const json = await res.json();
-            this.setState({ weatherData: json });
+            console.log(err);
         }
     }
 
@@ -80,10 +72,5 @@ export class Weather extends Component {
             </section>
         )
     }
-}
-
-
-const Stockholm = {
-    API: "https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=Stockholm"
 }
 export default Weather
