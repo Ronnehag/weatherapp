@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import M from 'materialize-css';
 
-const APIKEY = "5d1d8a019a1b42f2bd983655191203";
-
 export class SearchForm extends Component {
     static initialState = () => ({
         country: "",
@@ -25,14 +23,14 @@ export class SearchForm extends Component {
                 }
             }
 
-            M.Autocomplete.init(node, { data: options.data, limit: 5});
+            M.Autocomplete.init(node, { data: options.data, limit: 5 });
         }));
 
     }
 
     getSuggestions = async () => {
 
-        return await this.fetchSuggestions(`https://api.apixu.com/v1/search.json?key=${APIKEY}&q=${this.state.country}`);
+        return await this.fetchSuggestions(`https://api.apixu.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${this.state.country}`);
     }
 
     fetchSuggestions = async (url) => {

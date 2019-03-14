@@ -4,9 +4,6 @@ import Weather from './components/Weather';
 import Navbar from './components/Layout/Navbar';
 import WeatherDetails from './components/WeatherDetails';
 
-// Move to JSON?
-const APIKEY = "5d1d8a019a1b42f2bd983655191203";
-
 class App extends Component {
 
   static initialState = () => ({
@@ -81,9 +78,9 @@ class App extends Component {
   searchForWeatherByName = async (name) => {
     if (name !== null) {
       const currentWeather =
-        await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name}`);
+        await this.fetchData(`https://api.apixu.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}`);
       const { forecast } =
-        await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${APIKEY}&q=${name}&days=5`);
+        await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}&days=5`);
       const { forecastday } = forecast;
       this.setState({
         weatherData: currentWeather,

@@ -67,7 +67,7 @@ export class Weather extends Component {
                 if (position === null) return;
                 const { longitude, latitude } = position.coords;
                 const res =
-                    await fetch(`https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${latitude},${longitude}`);
+                    await fetch(`https://api.apixu.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${latitude},${longitude}`);
                 const json = await res.json();
                 this.setState({ weatherData: json });
                 const { name } = this.state.weatherData.location;
