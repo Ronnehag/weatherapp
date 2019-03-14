@@ -29,7 +29,7 @@ export class Navbar extends Component {
                         <a href="#!" className="brand-logo">Forecast</a>
                         <a href="#!" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
-                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Locations<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">Locations<i className="material-icons right">arrow_drop_down</i></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -39,12 +39,12 @@ export class Navbar extends Component {
 
                 <div>
                     <ul className="sidenav" id="mobile-demo">
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Locations<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a className="dropdown-trigger" href="#!" data-target="dropdown2">Locations<i className="material-icons right">arrow_drop_down</i></a></li>
                         <li>
-                            <div class="input-field">
+                            <div className="input-field">
                                 <input id="search" type="search" required />
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
+                                <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
+                                <i className="material-icons">close</i>
                             </div>
                         </li>
                     </ul>

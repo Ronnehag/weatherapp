@@ -3,10 +3,6 @@ import WeatherDetailsItem from './WeatherDetailsItem'
 
 export class WeatherDetails extends Component {
 
-    state = {
-
-    }
-
     forecastList = () => {
         return this.props.forecast.length ?
             (
@@ -25,13 +21,10 @@ export class WeatherDetails extends Component {
                         />
                     )
                 })
-            ) : (<p>Hello</p>);
+            ) : (<div className="center-align"><p>Loading data...</p></div>);
     }
 
     render() {
-        console.log(this.props.forecast);
-
-
         return (
             <div className="row">
                 <div className="col s12">
