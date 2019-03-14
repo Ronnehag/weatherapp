@@ -1,10 +1,62 @@
 import React from 'react'
 
-export default function WeatherDetailsItem({ date, mintemp, maxtemp, description, icon, maxwind }) {
+export default function WeatherDetailsItem({ date, mintemp, maxtemp, description, icon, maxwind, epoch }) {
+
+    // using formula m/s = 0.277778 * wind(km/h). Rounds to one decimal
+    const convertToMs = (wind) => {
+        const num = 0.277778;
+        return Math.round((wind * num)) / 10;
+    }
+
+    const getDay = (epoch) => {
+        let d = new Date(0);
+        d.setUTCSeconds(epoch);
+        let day = d.getDay();
+        switch (day) {
+            case 0: return "Sunday";
+            case 1: return "Monday";
+            case 2: return "Tuesday";
+            case 3: return "Wednesday";
+            case 4: return "Thursday";
+            case 5: return "Friday";
+            case 6: return "Saturday";
+        }
+    }
 
     return (
-        <div>
-
+        <div className="col s12 m2">
+            <div className="card blue-grey darken-1">
+                <div className="card-content white-text center-align" style={weatherCard}>
+                    <div className="row">
+                        <div className="col s12">
+                            <span>{getDay(epoch)}</span>
+                            <br />
+                            <small>{date}</small>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12">
+                            <img src={icon} alt="weather-icon" />
+                            <br />
+                            <small>{description}</small>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12">
+                            <small><i className="fas fa-temperature-low"></i> min: {mintemp} / max: {maxtemp} °C</small>
+                            <br />
+                            <small><i className="fas fa-wind"></i> {convertToMs(maxwind)} m/s</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     )
+}
+
+const weatherCard = {
+    minHeight: "260px",
+    background: "#035A96",
+    padding: "10px",
 }

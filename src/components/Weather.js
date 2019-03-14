@@ -22,7 +22,7 @@ export class Weather extends Component {
                 )
             } else {
                 const { name, country } = this.state.weatherData.location;
-                const { last_updated, temp_c, temp_f } = this.state.weatherData.current;
+                const { last_updated, temp_c, temp_f, is_day } = this.state.weatherData.current;
                 const { text, icon } = this.state.weatherData.current.condition;
                 return (
                     <WeatherCard
@@ -35,6 +35,7 @@ export class Weather extends Component {
                         text={text}
                         details={this.showDetails}
                         addToFav={this.addToFav}
+                        isday={is_day}
                     />
                 )
             }
@@ -58,6 +59,7 @@ export class Weather extends Component {
             });
         }
     }
+
     // Fetching the weather data from current position (lat/lon) on mounting.
     async componentDidMount() {
         try {
@@ -68,6 +70,8 @@ export class Weather extends Component {
                     await fetch(`https://api.apixu.com/v1/current.json?key=5d1d8a019a1b42f2bd983655191203&q=${latitude},${longitude}`);
                 const json = await res.json();
                 this.setState({ weatherData: json });
+                const { name } = this.state.weatherData.location;
+                this.props.search(name);
             });
         } catch (err) {
             console.log(err);

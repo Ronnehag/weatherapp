@@ -7,7 +7,7 @@ export class WeatherDetails extends Component {
         return this.props.forecast.length ?
             (
                 this.props.forecast.map(forecast => {
-                    const { date } = forecast;
+                    const { date, date_epoch } = forecast;
                     const { maxtemp_c, mintemp_c, maxwind_kph } = forecast.day;
                     const { text, icon } = forecast.day.condition;
                     return (
@@ -18,6 +18,7 @@ export class WeatherDetails extends Component {
                             maxwind={maxwind_kph}
                             description={text}
                             icon={icon}
+                            epoch={date_epoch}
                         />
                     )
                 })
@@ -27,12 +28,19 @@ export class WeatherDetails extends Component {
     render() {
         return (
             <div className="row">
-                <div className="col s12">
+                <div className="col s12" style={flexbox}>
                     {this.forecastList()}
                 </div>
             </div>
         )
     }
+}
+
+const flexbox = {
+    display: "flex",
+    flewWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center"
 }
 
 export default WeatherDetails

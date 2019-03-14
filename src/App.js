@@ -88,11 +88,6 @@ class App extends Component {
       const currentWeather =
         await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name2}`);
 
-      // const { name, country, localtime } = currentWeather.location;
-      // const { last_updated, temp_c, is_day, condition } = currentWeather.current;
-      // const { text, icon } = condition;
-      // console.log(name, country, localtime, last_updated, temp_c, is_day, text, icon);
-
       const { forecast } =
         await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${APIKEY}&q=${name2}&days=5`);
       const { forecastday } = forecast;
@@ -116,7 +111,7 @@ class App extends Component {
         </div>
         <div className="row">
           <div className="col s8">
-            <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} />
+            <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} search={this.searchForWeatherByName} />
           </div>
         </div>
         <div className="row">
