@@ -3,6 +3,7 @@ import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import Weather from './components/Weather';
 import Navbar from './components/Layout/Navbar';
+import WeatherDetails from './components/WeatherDetails';
 
 // Move to JSON?
 const APIKEY = "5d1d8a019a1b42f2bd983655191203";
@@ -82,16 +83,18 @@ class App extends Component {
     if (name2 !== null) {
       const currentWeather =
         await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name2}`);
-      const { name, country, localtime } = currentWeather.location;
-      const { last_updated, temp_c, is_day, condition } = currentWeather.current;
-      const { text, icon } = condition;
-      console.log(name, country, localtime, last_updated, temp_c, is_day, text, icon);
 
-      const forecast =
+      // const { name, country, localtime } = currentWeather.location;
+      // const { last_updated, temp_c, is_day, condition } = currentWeather.current;
+      // const { text, icon } = condition;
+      // console.log(name, country, localtime, last_updated, temp_c, is_day, text, icon);
+
+      const { forecast } =
         await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${APIKEY}&q=${name2}&days=5`);
+      const { forecastday } = forecast;
       this.setState({
         weatherData: currentWeather,
-        forecastData: forecast
+        forecastData: forecastday
       });
     }
   };
@@ -100,7 +103,7 @@ class App extends Component {
     const { weatherData, storedLocations } = this.state;
     return (
       <div>
-        <Navbar favoriteLocations={storedLocations} remove={this.removeFromLocalStorage} search={this.searchForWeatherByName}/>
+        <Navbar favoriteLocations={storedLocations} remove={this.removeFromLocalStorage} search={this.searchForWeatherByName} />
         <Header />
         <div className="row">
           <div className="col s8 offset-s2">
@@ -110,6 +113,11 @@ class App extends Component {
         <div className="row">
           <div className="col s8">
             <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <WeatherDetails forecast={this.state.forecastData} />
           </div>
         </div>
       </div>
