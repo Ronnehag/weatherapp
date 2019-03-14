@@ -35,6 +35,7 @@ class App extends Component {
   }
   // Check if storage exists, appends item. Else creates it as new.
   addToLocalStorage = (name) => {
+    name = name.split(',')[0];
     const exists = this.state.storedLocations.find((val) => val.name === name);
     if (exists) return;
     let data = JSON.parse(localStorage.getItem("locations"));
