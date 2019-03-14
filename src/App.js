@@ -2,17 +2,23 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import Weather from './components/Weather';
-import FavoriteLocations from './components/FavoriteLocations';
+import Navbar from './components/Layout/Navbar';
 
 // Move to JSON?
 const APIKEY = "5d1d8a019a1b42f2bd983655191203";
-
 
 class App extends Component {
 
   static initialState = () => ({
     weatherData: [],
-    storedLocations: []
+    storedLocations: [],
+    forecastData: [],
+    location: "",
+    country: "",
+    localtime: "",
+    lastUpdated: "",
+    tempC: "",
+    icon: ""
   });
   state = App.initialState();
 
@@ -38,14 +44,12 @@ class App extends Component {
   addToLocalStorage = (name) => {
     const exists = this.state.storedLocations.find((val) => val.name === name);
     if (exists) return;
-
     let data = JSON.parse(localStorage.getItem("locations"));
     if (data !== null) {
       const location = {
         name: name,
-        id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        id: getRandomId()
       }
-      console.log(location);
       this.setState(prevState => ({
         storedLocations: [...this.state.storedLocations, location]
       }), () => {
@@ -56,10 +60,11 @@ class App extends Component {
     }
   }
 
+  // Will only be called if localstorage isn't created
   createStorage = (name) => {
     const location = {
       name: name,
-      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      id: getRandomId()
     }
     this.setState(prevState => ({
       storedLocations: [...prevState.storedLocations, location]
@@ -73,29 +78,38 @@ class App extends Component {
     return json;
   }
 
-  searchForWeatherByName = async (name) => {
-    if (name !== null) {
-      const data =
-        await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name}`);
+  searchForWeatherByName = async (name2) => {
+    if (name2 !== null) {
+      const currentWeather =
+        await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name2}`);
+      const { name, country, localtime } = currentWeather.location;
+      const { last_updated, temp_c, is_day, condition } = currentWeather.current;
+      const { text, icon } = condition;
+      console.log(name, country, localtime, last_updated, temp_c, is_day, text, icon);
+
+      const forecast =
+        await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${APIKEY}&q=${name2}&days=5`);
       this.setState({
-        weatherData: data
+        weatherData: currentWeather,
+        forecastData: forecast
       });
     }
   };
 
   render() {
     const { weatherData, storedLocations } = this.state;
-
     return (
-      <div className="container" style={mainBg}>
+      <div>
+        <Navbar favoriteLocations={storedLocations} remove={this.removeFromLocalStorage} search={this.searchForWeatherByName}/>
         <Header />
-        <SearchForm searchForWeatherByName={this.searchForWeatherByName} />
+        <div className="row">
+          <div className="col s8 offset-s2">
+            <SearchForm searchForWeatherByName={this.searchForWeatherByName} />
+          </div>
+        </div>
         <div className="row">
           <div className="col s8">
             <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} />
-          </div>
-          <div className="col s4">
-            <FavoriteLocations locations={storedLocations} remove={this.removeFromLocalStorage} searchWeather={this.searchForWeatherByName} />
           </div>
         </div>
       </div>
@@ -103,8 +117,8 @@ class App extends Component {
   }
 }
 
-const mainBg = {
-  background: "#031196"
+function getRandomId() {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
 export default App;

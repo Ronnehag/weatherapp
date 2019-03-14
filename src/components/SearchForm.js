@@ -33,7 +33,7 @@ export class SearchForm extends Component {
             <form className="row">
                 <div className="col s12">
                     <div className="row">
-                        <div className="input-field col s6 offset-s2">
+                        <div className="input-field col s5 offset-s3">
                             <input
                                 type="text"
                                 name="country"
