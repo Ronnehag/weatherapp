@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import WeatherDetailsItem from './WeatherDetailsItem'
+import Loadingbar from './Layout/LoadingBar';
 
 export class WeatherDetails extends Component {
 
@@ -8,7 +9,7 @@ export class WeatherDetails extends Component {
             (
                 this.props.forecast.map(forecast => {
                     const { date, date_epoch } = forecast;
-                    const { maxtemp_c, mintemp_c, maxwind_kph } = forecast.day;
+                    const { maxtemp_c, mintemp_c, maxwind_kph, avgtemp_c } = forecast.day;
                     const { text, icon } = forecast.day.condition;
                     return (
                         <WeatherDetailsItem
@@ -19,10 +20,11 @@ export class WeatherDetails extends Component {
                             description={text}
                             icon={icon}
                             epoch={date_epoch}
+                            avgtemp={avgtemp_c}
                         />
                     )
                 })
-            ) : (<div className="center-align"><p>Loading data...</p></div>);
+            ) : (<Loadingbar />);
     }
 
     render() {

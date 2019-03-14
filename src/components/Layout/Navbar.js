@@ -29,7 +29,7 @@ export class Navbar extends Component {
                         <a href="#!" className="brand-logo" style={{marginLeft:"10px"}}> Forecast</a>
                         <a href="#!" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
-                            <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">Locations<i className="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">Saved locations<i className="material-icons right">arrow_drop_down</i></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -39,7 +39,7 @@ export class Navbar extends Component {
 
                 <div>
                     <ul className="sidenav" id="mobile-demo">
-                        <li><a className="dropdown-trigger" href="#!" data-target="dropdown2">Locations<i className="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a className="dropdown-trigger" href="#!" data-target="dropdown2">Saved locations<i className="material-icons right">arrow_drop_down</i></a></li>
                     </ul>
                     <ul id="dropdown2" className="dropdown-content">
                         {this.favoriteList()}

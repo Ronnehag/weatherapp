@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import Weather from './components/Weather';
 import Navbar from './components/Layout/Navbar';
@@ -78,12 +77,12 @@ class App extends Component {
   }
 
   // search for weather by name, will fetch 5 day forecast and current data
-  searchForWeatherByName = async (name2) => {
-    if (name2 !== null) {
+  searchForWeatherByName = async (name) => {
+    if (name !== null) {
       const currentWeather =
-        await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name2}`);
+        await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name}`);
       const { forecast } =
-        await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${APIKEY}&q=${name2}&days=5`);
+        await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${APIKEY}&q=${name}&days=5`);
       const { forecastday } = forecast;
       this.setState({
         weatherData: currentWeather,
@@ -97,7 +96,7 @@ class App extends Component {
     return (
       <div>
         <Navbar favoriteLocations={storedLocations} remove={this.removeFromLocalStorage} search={this.searchForWeatherByName} />
-        <Header />
+        <br /><br />
         <div className="row">
           <div className="col s8 offset-s2">
             <SearchForm searchForWeatherByName={this.searchForWeatherByName} />

@@ -52,7 +52,7 @@ export class Weather extends Component {
         }
     }
     // Update the card after search is invoked from App.js
-    componentDidUpdate(prevprops, prevstate) {
+    componentDidUpdate(prevprops) {
         if (this.props.weatherData !== prevprops.weatherData) {
             this.setState({
                 weatherData: this.props.weatherData

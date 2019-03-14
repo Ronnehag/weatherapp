@@ -18,31 +18,43 @@ body {
   margin-top: 10px;
 }
 
-.input.field{
-  color: white !important;
+label{
+  color: rgb(230,230,230,0.5) !important;
 }
+
 input[type="text"]{
   color: white;
 }
-.btn-orange{
-  margin-top: 6px;
-  color: #fff !important;
-  transition: all .2s ease-in-out !important;
-}
-.btn-orange:hover{
-  background: #ffa816 !important;
-}
+
 .color-yellow{
   color: #ffa816;
+  font-size: 18px;
 }
 .color-yellow:hover{
   cursor: pointer;
 }
-
 .remove-icon{
   transition: all .2s ease-in !important;
 }
 .remove-icon:hover{
   color: #ef5350 !important;
   transform: scale(1.1) !important;
+}
+
+.btn-search{
+  background: #035A96;
+  border: 1px solid #035A96;
+  transition: all .4s ease-in-out;
+}
+.btn-search:hover{
+  background: rgb(40,111,251, 0.5);
+  border: 1px solid rgb(40,111,251, 0.5)
+}
+
+
+#currentWeather{
+  font-size: 20px;
+}
+#currentWeather img{
+  min-width: 80px;
 }

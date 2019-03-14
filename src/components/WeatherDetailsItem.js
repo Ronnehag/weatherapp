@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function WeatherDetailsItem({ date, mintemp, maxtemp, description, icon, maxwind, epoch }) {
+export default function WeatherDetailsItem({ date, mintemp, maxtemp, description, icon, maxwind, epoch, avgtemp }) {
 
     // using formula m/s = 0.277778 * wind(km/h). Rounds to one decimal
     const convertToMs = (wind) => {
@@ -35,6 +35,8 @@ export default function WeatherDetailsItem({ date, mintemp, maxtemp, description
                                 <img src={icon} alt="weather-icon" />
                                 <br />
                                 <small>{description}</small>
+                                <br />
+                                <span>{avgtemp} °C</span>
                             </div>
                         </div>
                         <div className="row">
@@ -53,7 +55,7 @@ export default function WeatherDetailsItem({ date, mintemp, maxtemp, description
 }
 
 const weatherCard = {
-    minHeight: "250px",
+    minHeight: "270px",
     background: "#035A96",
     padding: "15px 10px",
 }
