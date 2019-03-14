@@ -76,19 +76,23 @@ class App extends Component {
 
   // search for weather by name, will fetch 5 day forecast and current data
   searchForWeatherByName = async (name) => {
-    if (name !== null) {
-      const currentWeather =
-        await this.fetchData(`https://api.apixu.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}`);
-      const { forecast } =
-        await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}&days=5`);
-
-      const { forecastday } = forecast;
-      if (forecastday == null) return;
-      this.setState({
-        weatherData: currentWeather,
-        forecastData: forecastday
-      });
+    if (name === undefined) return;
+    try {
+      {
+        const currentWeather =
+          await this.fetchData(`https://api.apixu.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}`);
+        const { forecast } =
+          await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}&days=5`);
+        const { forecastday } = forecast;
+        this.setState({
+          weatherData: currentWeather,
+          forecastData: forecastday
+        });
+      }
+    } catch (err) {
+      // TODO: Error handeling later
     }
+
   };
 
   render() {
@@ -97,19 +101,21 @@ class App extends Component {
       <div>
         <Navbar favoriteLocations={storedLocations} remove={this.removeFromLocalStorage} search={this.searchForWeatherByName} />
         <br /><br />
-        <div className="row">
-          <div className="col s8 offset-s2">
-            <SearchForm searchForWeatherByName={this.searchForWeatherByName} />
+        <div className="container">
+          <div className="row">
+            <div className="col s12 m12 l12">
+              <SearchForm searchForWeatherByName={this.searchForWeatherByName} />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col s8">
-            <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} search={this.searchForWeatherByName} />
+          <div className="row">
+            <div className="col s12">
+              <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} search={this.searchForWeatherByName} />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col s12">
-            <WeatherDetails forecast={this.state.forecastData} />
+          <div className="row">
+            <div className="col s12">
+              <WeatherDetails forecast={this.state.forecastData} />
+            </div>
           </div>
         </div>
       </div>

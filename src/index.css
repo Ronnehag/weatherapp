@@ -28,53 +28,44 @@ input[type="text"]{
 
 .color-yellow{
   color: #ffa816;
-  font-size: 18px;
+  transition: all .3s ease-in;
+}
+.color-yellow i{
+  font-size: 22px;
+  
 }
 .color-yellow:hover{
   cursor: pointer;
-}
-.remove-icon{
-  transition: all .2s ease-in !important;
-}
-.remove-icon:hover{
-  color: #ef5350 !important;
-  transform: scale(1.1) !important;
+  transform: scale(1.1);
 }
 
-.btn-search{
+.btn-search, .btn-fav{
   background: #035A96;
   border: 1px solid #035A96;
   transition: all .4s ease-in-out;
 }
-.btn-search:hover{
+.btn-search:hover, .btn-fav:hover{
   background: rgb(40,111,251, 0.5);
   border: 1px solid rgb(40,111,251, 0.5)
 }
 
 
-#currentWeather{
+
+.currentweather{
   font-size: 20px;
 }
-#currentWeather img{
-  min-width: 80px;
+.currentweather img{
+  min-width: 90px;
 }
 
-.btn-sm{
-  font-size: 10px;
+.flex-box{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
 }
 
-#mainWeather{
-  position: relative !important;
-}
-#favBtn{
-  position: absolute !important;
-  top: -180px !important;
-  left: 231px !important;
-  background: #F76201 !important;
-}
-#favBtn i{
-  transition: all .3s ease-in;
-}
-#favBtn i:hover{
-  transform: scale(1.1);
+
+@media only screen and(min-width: 768px){
+  .flex-box{
+  }
 }

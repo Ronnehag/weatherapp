@@ -82,9 +82,12 @@ export class Weather extends Component {
 
     render() {
         return (
-            <section>
-                {this.loadWeatherData()}
-            </section>
+            <div className="row">
+                <div className="col s12">
+                    {this.loadWeatherData()}
+                </div>
+            </div>
+
         )
     }
 }

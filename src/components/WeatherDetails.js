@@ -30,19 +30,12 @@ export class WeatherDetails extends Component {
     render() {
         return (
             <div className="row">
-                <div className="col s12" style={flexbox}>
+                <div className="col s12 flex-box">
                     {this.forecastList()}
                 </div>
             </div>
         )
     }
-}
-
-const flexbox = {
-    display: "flex",
-    flewWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center"
 }
 
 export default WeatherDetails

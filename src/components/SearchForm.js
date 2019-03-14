@@ -62,7 +62,7 @@ export class SearchForm extends Component {
             <form className="row" autoComplete="off">
                 <div className="col s12">
                     <div className="row">
-                        <div className="input-field col s5 offset-s3">
+                        <div className="input-field col s12 m5 l5 offset-m3 offset-l3">
                             <input
                                 type="text"
                                 name="country"
@@ -71,11 +71,10 @@ export class SearchForm extends Component {
                                 className="searchInput autocomplete" />
                             <label htmlFor="country">Location name</label>
                         </div>
-                        <div className="input-field col s2">
+                        <div className="input-field col s2 m2 l2">
                             <button type="submit" onClick={this.handleSubmit}
                                 className="btn waves-effect waves-light btn-search">
                                 Search
-                                <i className="material-icons right">send</i>
                             </button>
                         </div>
                     </div>

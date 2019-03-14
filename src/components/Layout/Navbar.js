@@ -24,9 +24,9 @@ export class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav style={{background: "#035A96"}}> 
+                <nav style={{ background: "#035A96" }}>
                     <div className="nav-wrapper">
-                        <a href="#!" className="brand-logo" style={{marginLeft:"10px"}}> Forecast</a>
+                        <a className="brand-logo" href="." style={{ marginLeft: "10px" }}> Forecast</a>
                         <a href="#!" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
                             <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">Saved locations<i className="material-icons right">arrow_drop_down</i></a></li>
