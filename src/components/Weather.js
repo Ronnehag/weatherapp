@@ -40,7 +40,9 @@ export class Weather extends Component {
                 )
             }
         } catch (err) {
-            console.log(err);
+            return (
+                <p>Couldn't fetch weather data :(</p>
+            )
         }
     }
     // Fetch current longitude / latitude using HTML5 geolocation

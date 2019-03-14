@@ -81,7 +81,9 @@ class App extends Component {
         await this.fetchData(`https://api.apixu.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}`);
       const { forecast } =
         await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${name}&days=5`);
+
       const { forecastday } = forecast;
+      if (forecastday == null) return;
       this.setState({
         weatherData: currentWeather,
         forecastData: forecastday

@@ -20,6 +20,7 @@ export default function WeatherDetailsItem({ date, mintemp, maxtemp, description
             case 4: return "Thursday";
             case 5: return "Friday";
             case 6: return "Saturday";
+            default: return "";
         }
     }
 
@@ -33,14 +34,12 @@ export default function WeatherDetailsItem({ date, mintemp, maxtemp, description
                                 <span>{getDay(epoch)} {date}</span>
                                 <br></br>
                                 <img src={icon} alt="weather-icon" />
-                                <br /><br/>
-                                <span><i className="fas fa-temperature-low"></i>  {avgtemp}°C</span>
                                 <br /><br />
-                                <small>{description}</small>
+                                <span><i className="fas fa-temperature-low"></i>  {avgtemp}°C</span>
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col s12" style={{ padding: "0" }}>
+                            <div className="col s12">
                                 <small><i className="fas fa-temperature-low"></i> {mintemp}°C / {maxtemp}°C (min/max)</small>
                                 <br />
                                 <small><i className="fas fa-wind"></i> {convertToMs(maxwind)} m/s</small>

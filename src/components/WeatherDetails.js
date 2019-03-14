@@ -12,7 +12,7 @@ export class WeatherDetails extends Component {
                     const { maxtemp_c, mintemp_c, maxwind_kph, avgtemp_c } = forecast.day;
                     const { text, icon } = forecast.day.condition;
                     return (
-                        <WeatherDetailsItem
+                        <WeatherDetailsItem key={date}
                             date={date}
                             maxtemp={maxtemp_c}
                             mintemp={mintemp_c}

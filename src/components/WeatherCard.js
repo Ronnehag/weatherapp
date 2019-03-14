@@ -12,15 +12,16 @@ export default function WeatherCard({ name, country, icon, text, updated, tempC,
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col s12 center-align">
+                    <div className="col s12 center-align" id="mainWeather">
+                        <span className="btn-floating btn-flat btn-sm waves-effect waves-light red" id="favBtn">
+                            <i className="material-icons color-yellow" title="Add to favourites" onClick={() => addToFav(name)}>favorite</i></span>
                         <span>{name}, {country} </span>
-                        <i className="material-icons color-yellow" title="Add to favourites" onClick={() => addToFav(name)}>star</i>
                         <br />
                         <small>Last updated: {updated}</small>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }

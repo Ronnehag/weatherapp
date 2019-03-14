@@ -4,34 +4,32 @@ import M from 'materialize-css';
 export class SearchForm extends Component {
     static initialState = () => ({
         country: "",
-        data: {}
     })
     state = SearchForm.initialState();
 
     handleChange = (e) => {
-        if (e.target.value < 3) return;
         this.setState({
             [e.target.name]: e.target.value
         }, (async () => {
+            if (this.state.country < 3) return;
             let options = { data: {} };
             let node = document.querySelector(".autocomplete");
-            const data = await this.getSuggestions();
+            const data = await this.fetchSuggestions(`https://api.apixu.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${this.state.country}`);
             for (let key in data) {
                 if (data.hasOwnProperty(key)) {
                     const element = data[key];
                     options.data[element.name] = null;
                 }
             }
-
-            M.Autocomplete.init(node, { data: options.data, limit: 5 });
+            M.Autocomplete.init(node, options);
         }));
 
     }
 
-    getSuggestions = async () => {
+    // getSuggestions = async () => {
 
-        return await this.fetchSuggestions(`https://api.apixu.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${this.state.country}`);
-    }
+    //     return await this.fetchSuggestions(`}`);
+    // }
 
     fetchSuggestions = async (url) => {
         try {
@@ -40,6 +38,7 @@ export class SearchForm extends Component {
             return json;
         } catch (err) {
             console.log(err);
+            return { err: "error" };
         }
     }
 

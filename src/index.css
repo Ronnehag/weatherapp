@@ -58,3 +58,23 @@ input[type="text"]{
 #currentWeather img{
   min-width: 80px;
 }
+
+.btn-sm{
+  font-size: 10px;
+}
+
+#mainWeather{
+  position: relative !important;
+}
+#favBtn{
+  position: absolute !important;
+  top: -180px !important;
+  left: 231px !important;
+  background: #F76201 !important;
+}
+#favBtn i{
+  transition: all .3s ease-in;
+}
+#favBtn i:hover{
+  transform: scale(1.1);
+}
