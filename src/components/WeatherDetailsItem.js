@@ -25,27 +25,24 @@ export default function WeatherDetailsItem({ date, mintemp, maxtemp, description
 
     return (
         <div className="col s12 m2">
-            <div className="card blue-grey darken-1">
+            <div className="card">
                 <div className="card-content white-text center-align" style={weatherCard}>
-                    <div className="row">
-                        <div className="col s12">
-                            <span>{getDay(epoch)}</span>
-                            <br />
-                            <small>{date}</small>
+                    <div className="row" style={{ margin: "15px" }}>
+                        <div className="row">
+                            <div className="col s12" style={{ padding: "0" }}>
+                                <span>{getDay(epoch)} {date}</span>
+                                <br></br>
+                                <img src={icon} alt="weather-icon" />
+                                <br />
+                                <small>{description}</small>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12">
-                            <img src={icon} alt="weather-icon" />
-                            <br />
-                            <small>{description}</small>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12">
-                            <small><i className="fas fa-temperature-low"></i> min: {mintemp} / max: {maxtemp} °C</small>
-                            <br />
-                            <small><i className="fas fa-wind"></i> {convertToMs(maxwind)} m/s</small>
+                        <div className="row">
+                            <div className="col s12" style={{ padding: "0" }}>
+                                <small><i className="fas fa-temperature-low"></i> min: {mintemp} / max: {maxtemp} °C</small>
+                                <br />
+                                <small><i className="fas fa-wind"></i> {convertToMs(maxwind)} m/s</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +53,7 @@ export default function WeatherDetailsItem({ date, mintemp, maxtemp, description
 }
 
 const weatherCard = {
-    minHeight: "260px",
+    minHeight: "250px",
     background: "#035A96",
-    padding: "10px",
+    padding: "15px 10px",
 }

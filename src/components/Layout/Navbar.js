@@ -40,22 +40,11 @@ export class Navbar extends Component {
                 <div>
                     <ul className="sidenav" id="mobile-demo">
                         <li><a className="dropdown-trigger" href="#!" data-target="dropdown2">Locations<i className="material-icons right">arrow_drop_down</i></a></li>
-                        <li>
-                            <div className="input-field">
-                                <input id="search" type="search" required />
-                                <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
-                                <i className="material-icons">close</i>
-                            </div>
-                        </li>
                     </ul>
                     <ul id="dropdown2" className="dropdown-content">
                         {this.favoriteList()}
                     </ul>
                 </div>
-
-
-
-
             </div>
         )
     }

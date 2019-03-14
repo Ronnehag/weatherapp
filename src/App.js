@@ -14,12 +14,6 @@ class App extends Component {
     weatherData: [],
     storedLocations: [],
     forecastData: [],
-    location: "",
-    country: "",
-    localtime: "",
-    lastUpdated: "",
-    tempC: "",
-    icon: ""
   });
   state = App.initialState();
 
@@ -32,7 +26,7 @@ class App extends Component {
       });
     }
   }
-
+  // Removes the saved ID from localstorage and updates state
   removeFromLocalStorage = (id) => {
     this.setState({
       storedLocations: [...this.state.storedLocations.filter(location => location.id !== id)]
@@ -40,7 +34,6 @@ class App extends Component {
       localStorage.setItem("locations", JSON.stringify(this.state.storedLocations));
     });
   }
-
   // Check if storage exists, appends item. Else creates it as new.
   addToLocalStorage = (name) => {
     const exists = this.state.storedLocations.find((val) => val.name === name);
@@ -61,7 +54,7 @@ class App extends Component {
     }
   }
 
-  // Will only be called if localstorage isn't created
+  // Will be called if localstorage isn't created when component mounts
   createStorage = (name) => {
     const location = {
       name: name,
@@ -73,6 +66,7 @@ class App extends Component {
     localStorage.setItem("locations", JSON.stringify(location));
   }
 
+  // general fetch method
   fetchData = async (url) => {
     try {
       const res = await fetch(url);
@@ -83,11 +77,11 @@ class App extends Component {
     }
   }
 
+  // search for weather by name, will fetch 5 day forecast and current data
   searchForWeatherByName = async (name2) => {
     if (name2 !== null) {
       const currentWeather =
         await this.fetchData(`https://api.apixu.com/v1/current.json?key=${APIKEY}&q=${name2}`);
-
       const { forecast } =
         await this.fetchData(`https://api.apixu.com/v1/forecast.json?key=${APIKEY}&q=${name2}&days=5`);
       const { forecastday } = forecast;
