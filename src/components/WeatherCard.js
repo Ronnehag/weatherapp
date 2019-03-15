@@ -17,8 +17,8 @@ export default function WeatherCard({ name, country, icon, text, updated, tempC,
                         <br />
                         <small>Last updated: {updated}</small>
                         <br /><br />
-                        <span className="btn-small btn-fav">
-                            <i className="material-icons right color-yellow" title="Add to favourites" onClick={() => addToFav(name)}>favorite</i>
+                        <span className="btn-small btn-fav" onClick={() => addToFav(name)}>
+                            <i className="material-icons right color-yellow" title="Add to favourites">favorite</i>
                             Add to favorites
                         </span>
                     </div>

@@ -41,7 +41,7 @@ export class Weather extends Component {
             }
         } catch (err) {
             return (
-                <p>Couldn't fetch weather data :(</p>
+                <p>Ops! Couldn't fetch weather data :(</p>
             )
         }
     }
