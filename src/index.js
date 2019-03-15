@@ -7,10 +7,12 @@ import App from './App';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
-ReactDOM.render(
+const routing = (
     <Router>
         <div>
-            <Route path="/" component={App} />
+            <Route exact path="/" component={App} />
         </div>
     </Router>
-    , document.getElementById('root'));
+)
+
+ReactDOM.render(routing, document.getElementById('root'))
