@@ -10,6 +10,7 @@ class App extends Component {
     weatherData: [],
     storedLocations: [],
     forecastData: [],
+    name: ""
   });
   state = App.initialState();
 
@@ -22,6 +23,12 @@ class App extends Component {
       });
     }
   }
+
+  // Will refetch the weather data for selected location every 15 mins (API updates every 15 min)
+  startTimerForUpdate = () => {
+    setTimeout(this.searchForWeatherByName(this.state.name), 1000 * 60 * 15);
+  }
+
   // Removes the saved ID from localstorage and updates state
   removeFromLocalStorage = (id) => {
     this.setState({
@@ -86,7 +93,8 @@ class App extends Component {
         const { forecastday } = forecast;
         this.setState({
           weatherData: currentWeather,
-          forecastData: forecastday
+          forecastData: forecastday,
+          name: currentWeather.location.name
         });
       }
     } catch (err) {
@@ -109,7 +117,7 @@ class App extends Component {
           </div>
           <div className="row">
             <div className="col s12">
-              <Weather addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} search={this.searchForWeatherByName} />
+              <Weather startTimer={this.startTimerForUpdate} addToLocalStorage={this.addToLocalStorage} weatherData={weatherData} search={this.searchForWeatherByName} />
             </div>
           </div>
           <div className="row">

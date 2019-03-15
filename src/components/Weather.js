@@ -58,10 +58,9 @@ export class Weather extends Component {
         if (this.props.weatherData !== prevprops.weatherData) {
             this.setState({
                 weatherData: this.props.weatherData
-            });
+            }, this.props.startTimer());
         }
     }
-
     // Fetching the weather data from current position (lat/lon) on mounting.
     async componentDidMount() {
         try {
