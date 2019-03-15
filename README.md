@@ -23,5 +23,6 @@ You are free to search any location worldwide, autocorrect will try and find the
 Gives the current weather and a detail view with a five day prognosis.
 
 BROWSER ONLY:
+
 localstorage is used to add favorite locations, locations can be accessed through the dropdown in the navbar.
 On mounting the app will fetch any data from localstorage and update the favorite list.
