@@ -53,12 +53,13 @@ export class Weather extends Component {
             cb(null);
         }
     }
-    // Update the card after search is invoked from App.js
+    // Update the card after search is invoked from App.js, passes the name back up to start timer
+    // checks if the dates and time isn't the same
     componentDidUpdate(prevprops) {
         if (this.props.weatherData !== prevprops.weatherData) {
             this.setState({
                 weatherData: this.props.weatherData
-            }, this.props.startTimer());
+            }, () => this.props.startTimer(this.state.weatherData.location.name));
         }
     }
     // Fetching the weather data from current position (lat/lon) on mounting.
