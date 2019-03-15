@@ -7,6 +7,8 @@ export class SearchForm extends Component {
     })
     state = SearchForm.initialState();
 
+    // Sets the state based on the input while typing.
+    // Fetching suggestions from the API and fills the materialize autocomplete component.
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -26,11 +28,7 @@ export class SearchForm extends Component {
 
     }
 
-    // getSuggestions = async () => {
-
-    //     return await this.fetchSuggestions(`}`);
-    // }
-
+    // General method to fetch from API since URL will change depending on input
     fetchSuggestions = async (url) => {
         try {
             const res = await fetch(url);
@@ -42,14 +40,16 @@ export class SearchForm extends Component {
         }
     }
 
+    // Removes any whitespace and replaces åäö with a and o to match the API search query
     validateInput = (input) => {
-        // check for numbers, symbols etc
         input = this.state.country.trim().toLowerCase();
         input = input.replace(/å|ä/g, "a");
         input = input.replace(/ö/g, "o");
         return input;
     }
 
+    // Submits the search form, validates the input field and invokes the 
+    // function passed on by props so that App changes it's state and re-render components.
     handleSubmit = (e) => {
         e.preventDefault();
         let searchName = this.validateInput(this.state.country);

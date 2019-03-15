@@ -1,5 +1,6 @@
 import React from 'react'
 
+// General function component that returns a loadingbar, stretching 12 columns
 export default function LoadingBar() {
     return (
         <div className="row">

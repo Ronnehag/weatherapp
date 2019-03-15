@@ -13,7 +13,8 @@ export class Weather extends Component {
         this.props.addToLocalStorage(name);
     }
 
-    // Loads the data and generate the card showing details
+    // Loading weather data from current state, passing down the props to 
+    // WeatherCard to render the main weather card.
     loadWeatherData = () => {
         try {
             if (this.state.weatherData.length === 0) {
@@ -45,7 +46,8 @@ export class Weather extends Component {
             )
         }
     }
-    // Fetch current longitude / latitude using HTML5 geolocation
+
+    // Fetch current longitude / latitude using HTML5 geolocation, callbacks the value
     getLocation = (cb) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(cb);
@@ -53,8 +55,10 @@ export class Weather extends Component {
             cb(null);
         }
     }
+
     // Update the card after search is invoked from App.js, passes the name back up to start timer
-    // checks if the dates and time isn't the same
+    // checks if the prev props isn't the same as this props, sets the state and callbacks
+    // the timeout from app.js to restart with the current name
     componentDidUpdate(prevprops) {
         if (this.props.weatherData !== prevprops.weatherData) {
             this.setState({
@@ -62,7 +66,8 @@ export class Weather extends Component {
             }, () => this.props.startTimer(this.state.weatherData.location.name));
         }
     }
-    // Fetching the weather data from current position (lat/lon) on mounting.
+
+    // Fetching the weather data from current position (longitude/latitude) on mounting.
     async componentDidMount() {
         try {
             this.getLocation(async (position) => {
@@ -76,7 +81,12 @@ export class Weather extends Component {
                 this.props.search(name);
             });
         } catch (err) {
-            console.log(err);
+            // If user hasn't accepted HTML5 geolocations, call the API to get Stockholms weather instead.
+            const res = await fetch(`https://api.apixu.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=Stockholm`);
+            const json = await res.json();
+            this.setState({ weatherData: json });
+            const { name } = this.state.weatherData.location;
+            this.props.search(name);
         }
     }
 

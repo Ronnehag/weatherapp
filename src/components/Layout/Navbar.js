@@ -3,6 +3,7 @@ import M from 'materialize-css'
 
 export class Navbar extends Component {
 
+    // Maps the favorites passed down from App, renders them in the dropdown and sidebar (mobile) in the navbar
     favoriteList = () => {
         return this.props.favoriteLocations.length ? (
             this.props.favoriteLocations.map(location => {
@@ -17,6 +18,7 @@ export class Navbar extends Component {
         ) : (<li>No favorites</li>);
     }
 
+    // Materialize autoinits the sidebar and dropdown links on mounting
     componentDidMount() {
         M.AutoInit();
     }

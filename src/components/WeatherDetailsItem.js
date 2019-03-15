@@ -8,6 +8,7 @@ export default function WeatherDetailsItem({ date, mintemp, maxtemp, description
         return Math.round((wind * num)) / 10;
     }
 
+    // Using epoch time to convert to new date and fetch the current day as string
     const getDay = (epoch) => {
         let d = new Date(0);
         d.setUTCSeconds(epoch);
