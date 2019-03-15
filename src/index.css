@@ -46,7 +46,7 @@ input[type="text"]{
 }
 .btn-search:hover, .btn-fav:hover{
   background: rgb(40,111,251, 0.5);
-  border: 1px solid rgb(40,111,251, 0.5)
+  border: 1px solid rgb(40,111,251, 0.5);
 }
 
 
